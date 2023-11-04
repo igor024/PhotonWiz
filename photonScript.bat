@@ -11,10 +11,9 @@ IF !option!==pull (
         ECHO No input given for the directory
         EXIT /b 2
     )
-    START CMD /k "scp -r root@10.6.95.12:/opt/photonvision/photonvision_config !dirStored!" 
+    START CMD /k "rsync -avzhe ssh root@10.6.95.12:/opt/photonvision/photonvision_config !dirStored!" 
     EXIT /b 0
 )
-
 IF !option!==push (
     SET /p "dirStored=Enter path to your config folder: "
     ECHO !dirStored!
@@ -24,6 +23,6 @@ IF !option!==push (
         EXIT /b 2
     )
 
-    START CMD /k "scp -r !dirStored! root@10.6.95.12:/opt/photonvision/" 
+    START CMD /k "rsync -avzhe ssh !dirStored! root@10.6.95.12:/opt/photonvision/" 
     EXIT /b 0
 )
